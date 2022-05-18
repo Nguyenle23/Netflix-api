@@ -25,7 +25,7 @@ const updateUser = async(req, res) => {
 const deleteUser = async(req, res) => {
     if (req.user._id === req.params.id || req.user.isAdmin) {
         try {
-            await userModel.User.findByIdAndDelete(req.params.id);
+            await userModel.User.findByIdAndUpdate(req.params.id, { isDestroy: true });
             return res.status(200).json("User deleted");
         } catch (err) {
             return res.status(500).json(err);

@@ -8,6 +8,7 @@ const userSchema = new Schema({
     password: { type: String, required: true, },
     avatar: { type: String, default: '' },
     isAdmin: { type: Boolean, default: false },
+    isDestroy: { type: Boolean, default: false },
 }, {
     timestamps: true
 });
@@ -21,6 +22,7 @@ const validateUser = (user) => {
         email: Joi.string().email().required(),
         avatar: Joi.string().default(''),
         isAdmin: Joi.boolean().default(false),
+        isDestroy: Joi.boolean().default(false),
     })
     return schema.validate(user)
 }
