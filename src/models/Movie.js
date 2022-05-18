@@ -3,6 +3,7 @@ const Schema = mongoose.Schema;
 
 const Movie = new Schema({
     title: { type: String, required: true, unique: true },
+    description: { type: String },
     img: { type: String },
     imgTitle: { type: String },
     thumbnail: { type: String },
