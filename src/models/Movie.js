@@ -12,6 +12,7 @@ const Movie = new Schema({
     limit: { type: String },
     genre: { type: String },
     isSeries: { type: Boolean, default: false },
+    isDestroy: { type: Boolean, default: false },
 }, {
     timestamps: true
 })

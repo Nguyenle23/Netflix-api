@@ -17,7 +17,7 @@ const createList = async(req, res) => {
 const deleteList = async(req, res) => {
     if (req.user.isAdmin) {
         try {
-            await List.findByIdAndDelete(req.params.id);
+            await List.findByIdAndUpdate(req.params.id, { isDestroy: true });
             res.status(201).json("The list has been delete...");
         } catch (err) {
             res.status(500).json(err);

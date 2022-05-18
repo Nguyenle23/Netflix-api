@@ -34,7 +34,7 @@ const updateMovie = async(req, res) => {
 const deleteMovie = async(req, res) => {
     if (req.user.isAdmin) {
         try {
-            await Movie.findByIdAndDelete(req.params.id);
+            await Movie.findByIdAndUpdate(req.params.id, { isDestroy: true });
             res.status(200).json("Delete movie successfully!");
         } catch (err) {
             res.status(500).json(err);
