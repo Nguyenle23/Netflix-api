@@ -65,21 +65,6 @@ const findUserStats = async(req, res) => {
     const today = new Date();
     const lastYear = today.setFullYear(today.getFullYear() - 1);
 
-    const monthsArray = [
-        'January',
-        'February',
-        'March',
-        'April',
-        'May',
-        'June',
-        'July',
-        'August',
-        'September',
-        'October',
-        'November',
-        'December'
-    ];
-
     try {
         const data = await userModel.User.aggregate([{
                 $project: {
