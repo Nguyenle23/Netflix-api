@@ -64,7 +64,6 @@ const findAllUser = async(req, res) => {
 const findUserStats = async(req, res) => {
     const today = new Date();
     const lastYear = today.setFullYear(today.getFullYear() - 1);
-
     try {
         const data = await userModel.User.aggregate([{
                 $project: {
