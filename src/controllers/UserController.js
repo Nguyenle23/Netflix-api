@@ -83,10 +83,24 @@ const findUserStats = async(req, res) => {
     }
 }
 
+const getAllUser = async(req, res) => {
+    if (req.user.isAdmin) {
+        try {
+            const users = await userModel.User.find();
+            res.status(200).json(users);
+        } catch (err) {
+            return res.status(500).json(err);
+        }
+    } else {
+        return res.status(403).json("You are not alow to see all users!");
+    }
+}
+
 module.exports = {
     updateUser,
     deleteUser,
     findUser,
     findAllUser,
-    findUserStats
+    findUserStats,
+    getAllUser
 }
