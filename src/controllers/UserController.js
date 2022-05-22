@@ -96,11 +96,25 @@ const getAllUser = async(req, res) => {
     }
 }
 
+const removeUser = async(req, res) => {
+    if (req.user.isAdmin) {
+        try {
+            await userModel.User.findByIdAndUpdate(req.params.id, { isDestroy: true });
+            return res.status(200).json("User removed");
+        } catch (err) {
+            return res.status(500).json(err);
+        }
+    } else {
+        return res.status(403).json("You are not alow to delete user!");
+    }
+}
+
 module.exports = {
     updateUser,
     deleteUser,
     findUser,
     findAllUser,
     findUserStats,
-    getAllUser
+    getAllUser,
+    removeUser,
 }
