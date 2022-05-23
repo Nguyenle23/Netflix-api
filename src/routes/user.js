@@ -12,6 +12,8 @@ router.get('/', verify, userController.findAllUser);
 router.get('/stats', userController.findUserStats);
 router.get('/getAll', verify, userController.getAllUser);
 router.delete('/removeUser/:id', verify, userController.removeUser);
+router.put('/updateUser/:id', verify, userController.updateUserAdmin);
+
 
 
 module.exports = router;

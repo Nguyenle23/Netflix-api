@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 const userModel = require('../models/User');
 
 const updateUser = async(req, res) => {
-    if (req.user._id === req.params.id || req.user.isAdmin) {
+    if (req.user.isAdmin) {
         if (req.body.password) {
             const salt = await bcrypt.genSalt(10);
             const hashPassword = await bcrypt.hash(req.body.password, salt);
@@ -109,6 +109,25 @@ const removeUser = async(req, res) => {
     }
 }
 
+const updateUserAdmin = async(req, res) => {
+    if (req.user.isAdmin) {
+        try {
+            const updateUser = await userModel.User.findByIdAndUpdate(req.params.id, req.body, { new: true });
+            // console.log(movie)
+            // const updatedMovie = await Movie.findByIdAndUpdate(
+            //     req.params.id, {
+            //         $set: req.body,
+            //     }, { new: true }
+            // );
+            res.status(200).json(updateUser);
+        } catch (err) {
+            res.status(500).json(err);
+        }
+    } else {
+        res.status(403).json("You are not allowed!");
+    }
+}
+
 module.exports = {
     updateUser,
     deleteUser,
@@ -117,4 +136,5 @@ module.exports = {
     findUserStats,
     getAllUser,
     removeUser,
+    updateUserAdmin
 }
